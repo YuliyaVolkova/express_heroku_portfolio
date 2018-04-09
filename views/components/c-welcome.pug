@@ -1,0 +1,16 @@
+-
+	var social = [{iconID: 'vk', url: 'https://yuliyavolkova.github.io/portfolio_pages/pages/about.html'},
+		{iconID: 'github', url: 'https://yuliyavolkova.github.io/portfolio_pages/'},
+		{iconID: 'in', url: 'https://yuliyavolkova.github.io/portfolio_pages/'}]
+- var component = 'c-welcome'
+.c-welcome
+	.c-welcome__img-wrap(style="background-image: url('assets/images/content/photo.jpg'); background-repeat:no-repeat;")
+		img.c-welcome__img.visually-hidden(alt="", src='assets/images/content/photo.jpg')
+	.c-welcome__content
+		h1.c-welcome__header Yuliya Volkova
+		h2.c-welcome__desc Личный сайт WEB Разработчика
+		+social(component, social, 'assets/images/sprites/sprite.svg')
+		ul.c-welcome__nav
+			each val in navIndex
+				li.c-welcome__nav-item
+					a.c-welcome__nav-link(href=`${val.url}`)= val.name

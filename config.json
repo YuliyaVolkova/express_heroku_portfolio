@@ -1,0 +1,22 @@
+{ 
+  "server": "http://localhost:3000",
+  "db": {
+    "host": "ds239309.mlab.com",
+    "port": "39309",
+    "name": "portfolio",
+    "user": "root",
+    "password": "3478lip"
+  },
+  "mail": {
+    "subject": "Сообщение с сайта",
+    "smtp": {
+      "host": "smtp.gmail.com",
+      "port": 465,
+      "secure": true,
+      "auth": {
+        "user": "webportfolio2018@gmail.com",
+        "pass": "45sort77"
+      }
+    }
+  }
+}

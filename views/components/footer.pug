@@ -1,0 +1,22 @@
+- var footerText = 'Я веб-разработчик из Санкт-Петербурга, и этот сайт я сделала в рамках обучения в Школе онлайн образования LoftSchool.'
+-
+	var copy = [
+		'&copy;&nbsp;Yuliya Volkova',
+		'создано в &laquo;&nbsp;<a href="https://loftschool.com/" target="_blank">LoftSchool</a>&nbsp;&raquo;',
+		'2018' ]
+-
+	var social = [{iconID: 'vk', url: 'https://yuliyavolkova.github.io/portfolio_pages/pages/about.html'},
+		{iconID: 'github', url: 'https://yuliyavolkova.github.io/portfolio_pages/'},
+		{iconID: 'in', url: 'https://yuliyavolkova.github.io/portfolio_pages/'}]
+
+footer.l-footer
+	.l-container
+		.l-footer__nav
+			+navMenu(navList)
+		.l-footer__text
+			span= footerText
+		+social('l-footer', social, 'assets/images/sprites/sprite.svg')
+		ul.c-copy.c-copy_footer
+			each val in copy
+				li.c-copy_item!= val
+

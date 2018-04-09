@@ -1,0 +1,48 @@
+mixin icon(iconName, iconClass, url)
+	svg(class=`${iconClass}`)
+		use(xlink:href=`${url}#${iconName}`)
+			title=iconName
+
+mixin social(classPrefix, listSocial, urlIcon)
+	ul(class=`${classPrefix}__social`)
+		each val in listSocial
+			li(class=`${classPrefix}__social-item`)
+				a(class=`${classPrefix}__social-link`, href=`${val.url}`, target="_blank")
+					+icon(val.iconID, 'svg-use', urlIcon)
+
+mixin navMenu(navlist)
+	ul.c-nav__list
+		each val in navList
+			li.c-nav__item
+				a.c-nav__link(href=`${val.pageUrl}`)= val.title	
+
+mixin hamburger(navlist, mod)
+	div(class=`l-hamburger${mod?` l-hamburger_${mod}`:''}`)
+		nav.c-hamburger-nav
+			a.c-hamburger-nav__target#openOverlay(href="")
+				svg.svg_hamburger#hamburger(version="1.1", xmlns="http://www.w3.org/2000/svg", xmlns:xlink="http://www.w3.org/1999/xlink", viewBox="0 0 40 35")
+					path(fill="#FFFFFF", d="M40,2.5C40,3.881,38.881,5,37.5,5h-35C1.119,5,0,3.881,0,2.5l0,0C0,1.119,1.119,0,2.5,0h35C38.881,0,40,1.119,40,2.5L40,2.5z")#firstLine
+					path(fill="#FFFFFF", d="M40,17.5c0,1.381-1.119,2.5-2.5,2.5h-35C1.119,20,0,18.881,0,17.5l0,0C0,16.119,1.119,15,2.5,15h35C38.881,15,40,16.119,40,17.5L40,17.5z")#centerLine
+					path(fill="#FFFFFF", d="M40,32.5c0,1.381-1.119,2.5-2.5,2.5h-35C1.119,35,0,33.881,0,32.5l0,0C0,31.119,1.119,30,2.5,30h35C38.881,30,40,31.119,40,32.5L40,32.5z")#lastLine
+			script(type="template/text")#hamburgerTemplate
+				a.c-hamburger-nav__close#closeOverlay.c-hamburger-nav__close(href="")
+					svg(version="1.1", xmlns="http://www.w3.org/2000/svg", width="100%", height="100%", viewBox="0 0 40 35",xmlns:xlink="http://www.w3.org/1999/xlink")
+						path(fill="#FFFFFF", d="M40,2.5C40,3.881,38.881,5,37.5,5h-35C1.119,5,0,3.881,0,2.5l0,0C0,1.119,1.119,0,2.5,0h35C38.881,0,40,1.119,40,2.5L40,2.5z")#firstLine
+						path(fill="#FFFFFF", d="M40,17.5c0,1.381-1.119,2.5-2.5,2.5h-35C1.119,20,0,18.881,0,17.5l0,0C0,16.119,1.119,15,2.5,15h35C38.881,15,40,16.119,40,17.5L40,17.5z")#centerLine
+						path(fill="#FFFFFF", d="M40,32.5c0,1.381-1.119,2.5-2.5,2.5h-35C1.119,35,0,33.881,0,32.5l0,0C0,31.119,1.119,30,2.5,30h35C38.881,30,40,31.119,40,32.5L40,32.5z")#lastLine
+				ul.c-hamburger-nav__list
+					each val in navList
+						li.c-hamburger-nav__item
+							+icon('dash', 'svg_dash', '../../assets/images/sprites/sprite.svg')
+							a.c-hamburger-nav__link.h-title-section.h-title-section_color(href=`${val.pageUrl}`)= val.title
+							+icon('dash', 'svg_dash', '../../assets/images/sprites/sprite.svg')
+				.overlay-section.section-left
+				.overlay-section.section-right
+
+mixin iconID(iconName, iconClass)
+	svg(class=`${iconClass}`)
+		use(xlink:href=`./images/icons/sprite.svg#${iconName}`)
+			title=iconName
+
+mixin image(imagePath, imageAlt, imageClass)
+	img(src=`./images/${imagePath}`, alt=`${imageAlt}`, class=`${imageClass}`)

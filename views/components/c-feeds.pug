@@ -1,0 +1,68 @@
+-
+	var feeds = [{ name: 'Ковальчук Дмитрий',
+		aboutAutor: 'основатель Loftschool',
+		text: 'Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!', photoUrl: 'assets/images/content/kovalchuk.jpg'},
+		{ name: 'Сабанцев Владимир',
+		aboutAuthor: 'преподаватель',
+		text: 'Этот код выдержит любые испытания. Только пожалуйста, не загружается сайт на слишком старых браузерах!', photoUrl: 'assets/images/content/sabanchev.jpg'}]
+
+.c-feeds
+	.c-feeds__header
+		.c-feeds__header-title
+			+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+			h2.h-title-section
+				| Что обо мне говорят
+			+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+			+icon('about_header', `svg-main-icon svg-main-icon_works`, 'assets/images/sprites/sprite.svg')
+	.c-feeds__content
+		each val in feeds
+			.c-feeds__card
+				.c-feeds__card-icon
+					span.fa.fa-quote-left
+				.c-feeds-card__text
+					span= val.text
+				.c-feeds-card__about
+					.c-feeds-card__img-wrap(style=`background-image: url(${val.photoUrl}); background-repeat:no-repeat;`)
+						img.c-feeds-card__img.visually-hidden(alt="", src=`require(${val.photoUrl})`)
+					.c-feeds-card__about-text
+						.c-feeds-card__about-name
+							span= val.name
+						.c-feeds-card__about-desc
+							span= val.aboutAuthor
+	.c-feeds-form-bg
+		.c-feeds-blured
+		.c-feeds-form
+			.c-feeds-form__header
+				+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+				h3.h-title-article
+					| Связаться со мной
+				+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+			form.c-form#feeds-form(action='/mail', method="POST", @submit='validateForm', novalidate="true", enctype="application/x-www-form-urlencoded")
+				.c-form__inner
+					.c-form__row
+						label.c-form__item
+							input.c-form__input(type="text", name="name", placeholder="Имя", v-model='name.value',
+							:class="{'error': attemptSubmit && wrongName}")
+							.validator-error(v-if="name.error")
+								| {{name.error}}
+					.c-form__row
+						label.c-form__item
+							input.c-form__input(type="email", name="email",  autocomplete="email", placeholder="Email", :class="{'error': attemptSubmit && wrongMail}", v-model='email.value')
+							.validator-error(v-if="email.error")
+								| {{email.error}}
+					.c-form__row
+						label.c-form__item
+							textarea.c-form__textarea(type="text", placeholder="Ваше сообщение", name="text", v-model='textmes.value', :class="{'error': attemptSubmit && missingMessage}")
+							.validator-error(v-if="textmes.error")
+								| {{textmes.error}}
+					ul.c-form__buts-action
+						li.c-form__nav-item
+							button.c-form__nav-link#targetMain(type="submit", value="Submit")
+								span.c-button__text
+									| Отправить
+						li.c-form__nav-item
+							button.c-form__nav-link(type="reset" value="Reset")
+								span.c-button__text
+									| Очистить
+	a.c-prev#first(href='#1section')
+		+icon('arrow_down', 'svg_prev', 'assets/images/sprites/sprite.svg')

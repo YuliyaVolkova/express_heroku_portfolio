@@ -1,0 +1,30 @@
+extends ../main.layout.pug
+
+block variables
+	- var bgTitleSvgId = 'portfolio_header'
+	- var pageM = 'about'
+block styles
+	link(rel='stylesheet' href='/assets/css/styles.about.css')
+
+block extend
+	.l-section.l-hero(data-section='1section')
+		.l-scroll-parallax-container
+			- for(i = 0; i < 9; i++)
+				.l-scroll-parallax__layer
+					img.l-scroll-parallax__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="")
+			include ../components/section-header.pug
+			.l-main__top
+					include ../components/l-main__top_two_color.pug
+			section.l-section.l-main.parallax__content(data-section='2section')
+				.l-main__wrapper.l-main_about
+					.l-main__column-one
+						include ../components/c-about-card.pug
+					.l-main__column-two
+						include ../components/c-skills-card.pug
+				section.l-section.l-last(data-section='3section')
+					.l-map-container
+					.l-contacts
+						include ../components/c-contacts.pug
+					include ../components/footer.pug
+block scripts
+	script(src='/app/about.bundle.js')

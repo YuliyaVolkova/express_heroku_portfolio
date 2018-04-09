@@ -1,0 +1,39 @@
+extends ../main.layout.pug
+
+block variables
+	- var pageClMod = 'blog'
+	-
+		var social = [{iconID: 'vk', url: 'https://yuliyavolkova.github.io/portfolio_pages/pages/about.html'},
+		{iconID: 'github', url: 'https://yuliyavolkova.github.io/portfolio_pages/'},
+		{iconID: 'in', url: 'https://yuliyavolkova.github.io/portfolio_pages/'}]
+	- var bgHeroSvgId = 'blog_header'
+	- var blog = 'blog'
+block styles
+	link(rel='stylesheet' href='/assets/css/styles.blog.css')
+block extend
+	header.l-section.l-hero.l-hero_blog
+		.l-scroll-parallax-container
+			- for(i = 0; i < 9; i++)
+				.l-scroll-parallax__layer
+					img.l-scroll-parallax__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="")
+			+social('l-hero', social, 'assets/images/sprites/sprite.svg')
+			+hamburger(navList, 'about')
+			.l-hero__develop.l-hero__develop_blog
+				.c-developer
+					.c-developer__img-wrap(style="background-image: url('assets/images/content/photo.jpg'); background-repeat:no-repeat;")
+						img.c-developer__img.visually-hidden(alt="", src='assets/images/content/photo.jpg')
+					.c-developer__content
+						.c-develop_blog-header
+							+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+							h1.h-title-section.h-title-section_color блог
+							+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+							+icon(bgHeroSvgId, 'svg_hero-blog', 'assets/images/sprites/sprite.svg')
+						h2.c-developer__desc.c-developer__desc_blog Статьи, которые я написал
+			.l-main__top
+				+icon('bg', 'svg_main-top_one-color', 'assets/images/sprites/sprite.svg')
+			section.l-section.l-main.l-main.parallax__content
+				.l-main__wrapper.l-main_blog
+					include ../components/c-blog.pug
+					include ../components/footer.pug
+block scripts
+	script(src='/app/blog.bundle.js')

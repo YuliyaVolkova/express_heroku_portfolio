@@ -1,0 +1,27 @@
+.c-blog
+	aside.c-blog__aside#absoluteNav
+		.c-blog__menu-swipe
+		nav.c-blog__nav
+			ul.c-blog__nav-list
+				each val, index in articles
+					case index
+						when 0	
+							li.c-blog__nav-item.is-active
+								a.c-blog__nav-link(href=`#${index+1}article`)= val.title
+						default
+							li.c-blog__nav-item
+								a.c-blog__nav-link(href=`#${index+1}article`)= val.title
+	main.c-blog__main
+		if (articles)
+			each val, index in articles
+				article.c-blog__article(data-section=`${index+1}article`)
+					h3.h-title-article= val.title
+					-
+						var date= new Date(val.date).toLocaleDateString('ru', {
+							year: 'numeric', 
+							month: '2-digit', 
+							day: '2-digit'
+						})
+					time.article__date(datetime="")= date
+					.article__text
+						span!= val.text

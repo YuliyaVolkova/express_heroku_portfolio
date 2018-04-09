@@ -1,0 +1,31 @@
+extends ../main.layout.pug
+
+block variables
+	- var bgTitleSvgId = 'portfolio_header'
+block styles
+	link(rel='stylesheet' href='/assets/css/styles.my_works.css')
+block extend
+	header.l-section.l-hero(data-section='1section')
+		.l-scroll-parallax-container
+			- for(i = 0; i < 9; i++)
+				.l-scroll-parallax__layer
+					img.l-scroll-parallax__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="")
+			include ../components/section-header.pug
+			.l-main__top
+				+icon('bg', 'svg_main-top_one-color', 'assets/images/sprites/sprite.svg')
+			section.l-section.l-main.l-main.parallax__content(data-section='2section')
+				.l-main__wrapper.l-main_works
+					.l-main__header
+						.l-main__header-title
+							+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+							h2.h-title-section Мои Pаботы
+							+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+							+icon('works_header', `svg-main-icon svg-main-icon_works`, 'assets/images/sprites/sprite.svg')
+				.l-main__slider
+					include ../components/c-slider.pug
+				section.l-section.l-feeds(data-section='3section')
+					.l-layout-first
+						include ../components/c-feeds.pug
+						include ../components/footer.pug
+block scripts
+	script(src='/app/my_works.bundle.js')

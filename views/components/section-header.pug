@@ -1,0 +1,18 @@
+-
+	var social = [{iconID: 'vk', url: 'https://yuliyavolkova.github.io/portfolio_pages/pages/about.html'},
+		{iconID: 'github', url: 'https://yuliyavolkova.github.io/portfolio_pages/'},
+		{iconID: 'in', url: 'https://yuliyavolkova.github.io/portfolio_pages/'}]
+- var arrowId = 'arrow_down'
+
+	+social('l-hero', social, 'assets/images/sprites/sprite.svg')
+	+hamburger(navList, 'about')
+	+icon(bgTitleSvgId, `svg_hero`, 'assets/images/sprites/sprite.svg')
+	.l-hero__develop
+		.c-developer
+			.c-developer__img-wrap(style="background-image: url('assets/images/content/photo.jpg'); background-repeat:no-repeat;")
+				img.c-developer__img.visually-hidden(alt="", src='assets/images/content/photo.jpg')
+			.c-developer__content
+				h1.c-developer__header Yuliya Volkova
+				h2.c-developer__desc Личный сайт WEB Разработчика
+	a.c-next#next(href='#2section')
+		+icon(arrowId, 'svg_next', 'assets/images/sprites/sprite.svg')

@@ -1,0 +1,33 @@
+include config/_mixin
+include config/_var
+block variables
+doctype html
+html(lang="ru", class=`${pageM?`${pageM}`:''}`)
+  head
+    meta(charset="utf-8")
+    meta(name="description" content="Разработка и сопровождение сайтов и веб приложений")
+    meta(name="keywords" content="")
+    meta(content="IE=edge" http-equiv="X-UA-Compatible")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0" )
+    style .svg-use,.svg_next{max-width: 2rem;}
+    link(rel='stylesheet' href='/assets/css/normalize.css')
+    title #{title}
+    link(rel="icon" type="image/png" sizes="16x16" href="icons-e37e1b74e0ab6134f431d1e0ff2f44e4/favicon-16x16.png")
+    link(rel="shortcut icon" href="icons-e37e1b74e0ab6134f431d1e0ff2f44e4/favicon.ico")
+    block styles
+  body(class=`${pageM?`${pageM}`:''}`)
+    //[if lt IE 8]> <p class="chromeframe">Похоже, что ты используешь устаревший браузер, друг. Пожалуйста, <a href="http:// browsehappy.com/">скачай новый браузер абсолютно бесплатно</a> или <a href="http://www.google.com/chromeframe/?redirect=true">активируй Google Chrome Frame</a></p> <![endif]
+    .l-wrapper
+      block extend
+    #loader-wrapper
+      #loader
+        svg.svg_preloader(version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="144px" height="144px" viewBox="0 0 144 144")
+          circle#bigCircle(opacity="0.4" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="72" cy="71.999" r="70")
+          circle#middleCircle(opacity="0.7" fill="none" stroke="#FFFFFF" stroke-width="3.8938" stroke-miterlimit="10" cx="72" cy="72" r="55")
+          circle#smallCircle(fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" cx="72" cy="72" r="40")
+        .loader__text#preloaderText
+          span
+      .loader-section.section-left
+      .loader-section.section-right
+    script(src='/app/common.bundle.js')
+    block scripts

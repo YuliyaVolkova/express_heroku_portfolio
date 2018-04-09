@@ -1,0 +1,35 @@
+extends ../main.layout.pug
+
+block variables
+	- var pageM = 'hero'
+	- var title = 'welcome WEB Разработка'
+	-
+		var copy = [
+			'&copy;&nbsp;Yuliya Volkova',
+			'создано в &laquo;&nbsp;<a href="https://loftschool.com/" target="_blank">LoftSchool</a>&nbsp;&raquo;',
+			'2018' ]
+block styles
+	link(rel='stylesheet' href='/assets/css/styles.index.css')
+block extend
+	#parallax.l-parallax__container
+		- for (var i = 0; i < 10; i++)
+			.parallax-layer(data-speed=`${(i+1)*0.01}`)
+				img.parallax-layer__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="")
+	.l-login__button
+		button.c-button#targetLogin
+			span.c-button__text
+				| Авторизоваться
+	.l-welcome
+		.l-flip-container
+			.l-face-container
+			.l-backface-container
+			.visually-hidden#faceBl(type='template/text')
+				include ../components/c-welcome.pug
+			.visually-hidden#backFaceBl(type='template/text')
+				include ../components/c-login-form.pug
+	footer.l-copy
+		ul.c-copy
+			each val in copy
+				li.c-copy_item!= val
+block scripts
+	script(src='/app/login.bundle.js')

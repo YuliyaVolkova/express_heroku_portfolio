@@ -1,0 +1,16 @@
+- var aboutText = 'Я веб разработчик из Санкт-Петербурга. Мне 38 лет. Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты. Этот сайт я сделала в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!'
+
+	.c-about-card
+		.c-about-card__header
+			+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+			h2.h-title-section обо мне
+			+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+			+icon('about_header', `svg-main-icon svg-main-icon_about`, 'assets/images/sprites/sprite.svg')
+		img.c-about-card__img(alt="", src='assets/images/content/photo.jpg')
+		.c-about-card__content
+			.c-about-card__content-header
+				+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+				h3.h-title-article Кто я
+				+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+			.c-about-card__content-text
+				span= aboutText

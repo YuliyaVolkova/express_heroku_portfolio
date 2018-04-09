@@ -1,0 +1,52 @@
+.c-login-form
+	.c-login-form__header
+		+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+		h3.h-title-article
+			| Авторизуйтесь
+		+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+	form.c-form(action="/login" id="login-form" method="POST",
+	@submit='validateForm', novalidate="true")
+		.c-form__inner
+			.c-form__row
+				label.c-form__item
+					span.c-form__item-logo(:class="{'error': attemptSubmit && wrongLogin}")
+						+icon('login', 'svg_login', 'assets/images/sprites/sprite.svg')
+					input.c-form__input(type="text", name="login", autocomplete="username", placeholder="Логин", v-model='login.value',
+					:class="{'error': attemptSubmit && wrongLogin}")
+					.validator-error(v-if="login.error")
+						| {{login.error}}
+			.c-form__row
+				label.c-form__item
+					span.c-form__item-logo(:class="{'error': attemptSubmit && wrongPassword}")
+						+icon('password', 'svg_login', 'assets/images/sprites/sprite.svg')
+					input.c-form__input(type="password", name="password", autocomplete="current-password", placeholder="Пароль", v-model='password.value',
+					:class="{'error': attemptSubmit && wrongPassword}")
+					.validator-error(v-if="password.error")
+						| {{password.error}}
+					if (msg)
+						.validator-error= msg
+			.c-form__buttons
+				label.c-form__item
+					input.c-form__checkbox(type="checkbox", name="capcha" v-model='checkbox.value', :class="{'error': attemptSubmit && wrongCheckbox}")
+					span.c-form__item-title.c-form__item-title--checkbox
+						| Я человек
+				span.c-form__row-title
+					| Вы точно не робот?
+				.c-form__row
+					label.c-form__item
+						input.c-form__radio(type="radio", name="noBot", value="yes" v-model='radio.value')
+						span.c-form__item-title.c-form__item-title--radio(:class="{'error': attemptSubmit && wrongRadio}")
+							| Да
+					label.c-form__item
+						input.c-form__radio(type="radio", name="noBot", value="none" v-model='radio.value')
+						span.c-form__item-title.c-form__item-title--radio
+							| Не уверен
+			ul.c-form__buts-action
+				li.c-form__nav-item
+					button.c-form__nav-link#targetMain(type="button")
+						span.c-button__text
+							| На главную
+				li.c-form__nav-item
+					button.c-form__nav-link(type="submit",value="Submit")
+						span.c-button__text
+							| Войти

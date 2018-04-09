@@ -1,0 +1,28 @@
+.c-slider#worksSlider
+	.c-slider__desc-fr(v-for="index in slides", v-if="index === active", :key="index")
+		.c-slider__desc-header
+			+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+			h3.h-title-article
+				| {{dataArr[index-1].title}}
+			+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+		.c-slider__desc-text
+			span
+				| {{dataArr[index-1].technologies}}
+		a.c-button.c-slider__desc-link(href="https://webmanshake.ru/" target="_blank")
+			+icon('link', 'svg_link', 'assets/images/sprites/sprite.svg')
+			span.c-button__text
+				| Посмотреть сайт
+	.c-slider__main-fr
+		transition-group(name='slide', mode='in-out',
+		enter-class='slide-in', leave-class='slide-out', enter-active-class='animated slide-in-active',
+		leave-active-class='animated slide-out-active', tag='div')
+			img.c-slider__main-img(alt="", v-for="ind in slides", v-if="ind === active", :key="ind", :src="dataArr[ind-1].url")
+	.c-slider__control-fr
+		.c-slider__control-prev
+			img.c-slider__control-img(alt="", v-for="indx in slides", v-if="indx === prev", :key="indx", :src="dataArr[indx-1].url")
+			a.c-slider__control__link(href="#", @click="move(-1)")
+				+icon('portf_arrow_up', 'svg_slider-arrow', 'assets/images/sprites/sprite.svg')
+		.c-slider__control-next
+			img.c-slider__control-img(alt="", v-for="count in slides", v-if="count === next", :key="count", :src="dataArr[count-1].url")
+			a.c-slider__control__link(href="#", @click="move(1)")
+				+icon('portf_arrow_up', 'svg_slider-arrow', 'assets/images/sprites/sprite.svg')
