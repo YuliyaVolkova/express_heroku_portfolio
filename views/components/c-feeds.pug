@@ -37,7 +37,7 @@
 				h3.h-title-article
 					| Связаться со мной
 				+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
-				if (mes)
+				//-if (mes)
 					.popup-text= mes
 			form.c-form#feeds-form(action='/mail', method="POST", @submit='validateForm', novalidate="true", enctype="application/x-www-form-urlencoded")
 				.c-form__inner
