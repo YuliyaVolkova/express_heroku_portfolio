@@ -21,5 +21,6 @@ router.get('/login', ctrlLogin.login);
 router.post('/login', ctrlLogin.auth);
 
 router.get('/admin', ctrlAdmin.admin);
+router.post('/admin/slider', ctrlAdmin.uploadSlide);
 
 module.exports = router;

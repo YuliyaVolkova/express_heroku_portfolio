@@ -37,6 +37,6 @@ process.on('SIGINT', function() {
     process.exit(0);
   });
 });
-
 require('./blog');
-require('./works');
+require('./slider');
+require('./skills');

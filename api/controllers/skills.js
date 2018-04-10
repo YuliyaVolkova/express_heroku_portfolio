@@ -1,34 +1,29 @@
 const mongoose = require('mongoose');
 
-module.exports.getArticles = function (req, res) {
-  const articleDefault = [{
-    title: 'Пока статей нет',
-    date: '2016-10-12',
-    text: 'но скоро появятся'
-  }];
-  const blog = mongoose.model('blog');
-  blog
+module.exports.getSkills = function (req, res) {
+  const skill = mongoose.model('skill');
+  skill
     .find()
     .then(items => {
       if (!items.length) {
         res
           .status(200)
-          .json({articles: articleDefault});
+          .json({skills: []});
       } else {
         res
           .status(200)
-          .json({articles: items});
+          .json({skills: items});
       }
     });
 };
 
-module.exports.createArticle = function (req, res) {
+module.exports.createSkill = function (req, res) {
   // создаем новую запись блога и передаем в нее поля из формы
-  const Model = mongoose.model('blog');
+  const Model = mongoose.model('skill');
   let item = new Model({
-    title: req.body.title,
-    date: new Date(req.body.date),
-    text: req.body.text
+    name: req.body.name,
+    percents: req.body.percents,
+    type: req.body.type
   });
   // сохраняем запись в базе
   item
@@ -47,16 +42,16 @@ module.exports.createArticle = function (req, res) {
     });  
 };
 
-module.exports.editArticle = function (req, res) {
+module.exports.editSkill = function (req, res) {
   const id = req.params.id;
 
   let data = {
-    title: req.body.title,
-    date: new Date(req.body.date),
-    text: req.body.text
+    name: req.body.name,
+    percents: req.body.percents,
+    type: req.body.type
   };
 
-  const Model = mongoose.model('blog');
+  const Model = mongoose.model('skill');
 
   Model
     .findByIdAndUpdate(id, {$set: data})
@@ -80,9 +75,9 @@ module.exports.editArticle = function (req, res) {
     });
 };
 
-module.exports.deleteArticle = function (req, res) {
+module.exports.deleteSkill = function (req, res) {
   const id = req.params.id;
-  const Model = mongoose.model('blog');
+  const Model = mongoose.model('skill');
 
   Model
     .findByIdAndRemove(id)
