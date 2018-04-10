@@ -8,6 +8,13 @@ const ctrlAdmin = require('../controllers/admin');
 const ctrlAbout = require('../controllers/about');
 const ctrlWorks = require('../controllers/works');
 
+var isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/');
+};
+
 router.get('/', ctrlHome.index);
 
 router.get('/blog', ctrlBlog.blog);
@@ -20,7 +27,7 @@ router.post('/mail', ctrlWorks.sendEmail);
 router.get('/login', ctrlLogin.login);
 router.post('/login', ctrlLogin.auth);
 
-router.get('/admin', ctrlAdmin.admin);
-router.post('/admin/slider', ctrlAdmin.uploadSlide);
+router.get('/admin', isAuthenticated, ctrlAdmin.admin);
+router.post('/admin/slider', isAuthenticated, ctrlAdmin.uploadSlide);
 
 module.exports = router;

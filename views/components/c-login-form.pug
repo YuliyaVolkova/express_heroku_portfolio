@@ -4,6 +4,8 @@
 		h3.h-title-article
 			| Авторизуйтесь
 		+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
+	if (msg)
+		.c-login__mes=msg
 	form.c-form(action="/login" id="login-form" method="POST",
 	@submit='validateForm', novalidate="true")
 		.c-form__inner
@@ -23,8 +25,6 @@
 					:class="{'error': attemptSubmit && wrongPassword}")
 					.validator-error(v-if="password.error")
 						| {{password.error}}
-					if (msg)
-						.validator-error= msg
 			.c-form__buttons
 				label.c-form__item
 					input.c-form__checkbox(type="checkbox", name="capcha" v-model='checkbox.value', :class="{'error': attemptSubmit && wrongCheckbox}")

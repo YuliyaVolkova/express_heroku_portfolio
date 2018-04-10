@@ -1,5 +1,10 @@
-{ 
-  "server": "http://localhost:3000",
+{
+  "server": {
+    "path": "http://localhost:3000",
+    "blog": "/api/blog",
+    "skill": "/api/skill",
+    "slider": "/api/slider"
+  },
   "db": {
     "host": "ds239309.mlab.com",
     "port": "39309",

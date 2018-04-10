@@ -2,7 +2,8 @@ const formidable = require('formidable');
 const fs = require('fs');
 const path = require('path');
 const http = require('request');
-const config = require('../config.json');
+const config = require('../config/config.json');
+const apiServer = config.server.path;
 
 module.exports.admin = function (req, res) {
   res.render('my_pages/admin', {
@@ -38,16 +39,19 @@ module.exports.uploadSlide = function (req, res) {
         fs.unlink(fileName);
         fs.rename(files.photo.path, fileName);
       }
-      const pathApi = '/api/slider';
+      const pathApi = config.server.slider;
       let dir = fileName.substr(fileName.indexOf('\\'));
       const requestOptions = {
-        url: config.server + pathApi,
+        url: apiServer + pathApi,
         method: 'POST',
         json: {
           title: fields.title,
           technologies: fields.technologies,
           url: dir
         }
+        /*headers: {
+          'secure': 'verySecret!'
+        }*/
       };
 
       http(requestOptions, function (error, response, body) {

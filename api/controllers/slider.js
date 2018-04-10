@@ -21,17 +21,6 @@ module.exports.getSlides = function (req, res) {
       }
     });
 };
-
-/*module.exports.setSlides = function(req, res) {
-  const Model = mongoose.model('slider');
-  Model.remove({}, err => {
-    if (err) return res.status(400).json({message: err.message, error: err});  
-    const item = new Model({title: req.body.title, technologies: req.body.technologies, url: req.body.url});
-    item
-      .save()
-      .then(pic => res.status(201).json(pic), e => res.status(400).json({message: e.message, error: e}))
-  });
-}*/
 module.exports.addSlide = function (req, res) {
   const Model = mongoose.model('slider');
   let item = new Model({

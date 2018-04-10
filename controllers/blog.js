@@ -1,9 +1,11 @@
 const http = require('request');
-const config = require('../config.json');
+const config = require('../config/config.json');
+const apiServer = config.server.path;
+
 module.exports.blog = function (req, res) {
-  const pathAPI = '/api/blog';
+  const pathAPI = config.server.blog;
   const requestOptions = {
-    url: config.server + pathAPI,
+    url: apiServer + pathAPI,
     method: 'GET',
     json: {}
   };

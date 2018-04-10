@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const config = require('../../config');
+const config = require('./config');
 
 mongoose.Promise = global.Promise;
 
@@ -12,9 +12,7 @@ mongoose
 
 mongoose.connection.on('connected', function() {
   console.log(
-    `Mongoose default connection open mongodb://${config.db.host}:${
-      config.db.port
-    }/${config.db.name}`
+    `Mongoose default connection open mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`
   );
 });
 
@@ -37,6 +35,7 @@ process.on('SIGINT', function() {
     process.exit(0);
   });
 });
-require('./blog');
-require('./slider');
-require('./skills');
+require('../api/models/blog');
+require('../api/models/slider');
+require('../api/models/skills');
+require('../models/user');

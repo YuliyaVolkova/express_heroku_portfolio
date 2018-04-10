@@ -1,10 +1,10 @@
 const nodemailer = require('nodemailer');
-const config = require('../config.json');
+const config = require('../config/config.json');
 
 module.exports.works = function (req, res) {
   const sendObj = {
     title: 'Мои работы',
-    //mes: req.query.mes
+    mes: req.flash('message')
   };
   res.render('my_pages/my_works', Object.assign({}, sendObj));
 }
@@ -13,7 +13,8 @@ module.exports.sendEmail = function(req, res) {
   // требуем наличия имени, обратной почты и текста
   if (!req.body.name || !req.body.email || !req.body.text) {
     //если что-либо не указано - сообщаем об этом
-    return res.redirect('/works?msg=Все поля нужно заполнить!');
+    req.flash('message', 'Все поля нужно заполнить!')
+    return res.redirect('/works');
   }
   // инициализируем модуль для отправки писем и указываем данные из конфига
   const transporter = nodemailer.createTransport(config.mail.smtp);
@@ -31,8 +32,10 @@ module.exports.sendEmail = function(req, res) {
   transporter.sendMail(mailOptions, function (error, info) {
     //если есть ошибки при отправке - сообщаем об этом
     if (error) {
-      return res.redirect('/works?mes=При отправке письма произошла ошибка: ' + error);
+      req.flash('message', 'При отправке письма произошла ошибка: ' + error);
+      return res.redirect('/works');
     }
-    res.redirect('/works?mes=Письмо успешно отправлено');
+    req.flash('message', 'Письмо успешно отправлено')
+    res.redirect('/works');
   });
 }
