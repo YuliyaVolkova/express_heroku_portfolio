@@ -1,6 +1,6 @@
 {
   "server": {
-    "path": "http://localhost:3000",
+    "path": "https://serverportfolio.herokuapp.com/",
     "blog": "/api/blog",
     "skill": "/api/skill",
     "slider": "/api/slider"
