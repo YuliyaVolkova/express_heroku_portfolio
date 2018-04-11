@@ -4,7 +4,7 @@ const config = require('../config/config.json');
 module.exports.works = function (req, res) {
   const sendObj = {
     title: 'Мои работы',
-    mes: req.flash('message')
+    msg: req.flash('message')
   };
   res.render('my_pages/my_works', Object.assign({}, sendObj));
 }

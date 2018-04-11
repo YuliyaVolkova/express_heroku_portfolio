@@ -17,7 +17,7 @@ module.exports.auth = function (req, res, next) {
       return next(err);
     }
     if (!user) {
-      req.flash('message', ' укажите правильный логин и пароль!');
+      //req.flash('message', ' укажите правильный логин и пароль!');
       return res.redirect('/login');
     }
     req.logIn(user, function(err) {
