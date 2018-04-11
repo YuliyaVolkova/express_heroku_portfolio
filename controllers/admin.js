@@ -41,6 +41,7 @@ module.exports.uploadSlide = function (req, res) {
       }
       const pathApi = config.server.slider;
       let dir = fileName.substr(fileName.indexOf('\\'));
+      console.log(`fileName загружена ${fileName}`);
       const requestOptions = {
         url: apiServer + pathApi,
         method: 'POST',

@@ -7,7 +7,7 @@ module.exports.login = function (req, res) {
   }
   res.render('my_pages/login', {
     title: 'Авторизация',
-    msg: req.flash('message')
+    mes: req.flash('message')
   });
 }
 

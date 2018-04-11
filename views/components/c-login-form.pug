@@ -4,8 +4,8 @@
 		h3.h-title-article
 			| Авторизуйтесь
 		+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
-		if (msg)
-			.c-login__mes=msg
+		if (mes)
+			.c-login__mes=mes
 	form.c-form(action="/login" id="login-form" method="POST",
 	@submit='validateForm', novalidate="true")
 		.c-form__inner
