@@ -81,7 +81,7 @@ router.post('/slider', upload.single('file'), (req, res) => {
   // res.json({ file: req.file });
   console.log(`post добавление слайда ${res.json({ file: req.file })}`);
   //res.redirect('/');
-});*/
+});
 
 // If the connection throws an error
 mongoose.connection.on('error', function(err) {
