@@ -14,6 +14,7 @@ mongoose.Promise = global.Promise;
 const mongoURI = `mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`;
 
 //const conn = mongoose.createConnection(mongoURI);
+let gfs;
 mongoose
   .connect(mongoURI)
   .catch(e => {
@@ -23,8 +24,11 @@ mongoose
 
 mongoose.connection.on('connected', function() {
   console.log(`Mongoose default connection open ${mongoURI}`);
-  //var conn = mongoose.createConnection(mongoURI);
-  console.log(mongoose.connection.db);
+  const conn = mongoose.connection;
+   // Init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+  console.log(gfs);
 });
 
 // Init gfs
