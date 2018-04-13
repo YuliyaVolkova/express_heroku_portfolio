@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const config = require('./config');
+const path = require('path');
 
 const crypto = require('crypto');
 const multer = require('multer');
@@ -52,7 +53,8 @@ const upload = multer({ storage });
 
 // @route GET /
 // @desc Loads form
-router.get('/slider', (req, res) => {
+router.get('/api/slider', (req, res) => {
+  console.log('in get sliders');
   gfs.files.find().toArray((err, files) => {
     // Check if files
     if (!files || files.length === 0) {
