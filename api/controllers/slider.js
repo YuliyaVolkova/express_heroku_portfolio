@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const crypto = require('crypto');
+
 module.exports.getSlides = function (req, res) {
   const slider = mongoose.model('herokuslide');
   const mesDefault = [{
@@ -21,7 +23,7 @@ module.exports.getSlides = function (req, res) {
       }
     });
 };
-module.exports.addSlide = function (req, res) {
+/*module.exports.addSlide = function (req, res) {
   const Model = mongoose.model('herokuslide');
   let item = new Model({
     title: req.body.title,
@@ -46,4 +48,7 @@ module.exports.addSlide = function (req, res) {
           status: 'При добавление работы произошла ошибка: ' + err
         });
     });  
-};
+};*/
+
+/*module.exports.addSlide = function (req, res) {
+  };*/

@@ -8,12 +8,16 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const passport = require('passport');
 
+const methodOverride = require('method-override');
+
 require('./config/db');
 
 const app = express();
 const index = require('./routes/index');
 const indexApi = require('./api/routes/index');
 app.set('port', (process.env.PORT || 5000));
+
+app.use(methodOverride('_method'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -41,9 +45,6 @@ require('./config/config-passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/myadmin(.html)?', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'myadmin.html'));
-});
 app.use('/api', indexApi);
 app.use('/', index);
 
