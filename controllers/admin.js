@@ -14,14 +14,20 @@ module.exports.admin = function (req, res) {
   });
 };
 
-mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`);
+//mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`);
 var conn = mongoose.connection;
 
 module.exports.uploadSlide = function (req, res) {
   let form = new formidable.IncomingForm();
-  //let upload = 'public/upload';
+  let upload = 'public/upload';
+  console.log('in controller admin.js module uploadSlide');
 
-  form.uploadDir = __dirname+"/Uploads";
+  //form.uploadDir = __dirname+"/Uploads";
+  if (!fs.existsSync(upload)) {
+    fs.mkdirSync(upload);
+  }
+  //form.uploadDir = __dirname+"/Uploads";
+  form.uploadDir = path.join(process.cwd(), upload);
     form.keepExtensions = true;
     form.parse(req, function (err, fields, files) {
         if (!err) {
