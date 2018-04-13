@@ -13,14 +13,15 @@ mongoose.Promise = global.Promise;
 // Mongo URI
 const mongoURI = `mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`;
 
-const conn = mongoose.createConnection(mongoURI);
+//const conn = mongoose.createConnection(mongoURI);
 
-/*mongoose
-  .connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`)
+mongoose
+  .connect(mongoURI)
   .catch(e => {
     console.error(e);
     throw e;
-  });*/
+  });
+
 
 mongoose.connection.on('connected', function() {
   console.log(`Mongoose default connection open ${mongoURI}`);
@@ -29,7 +30,7 @@ mongoose.connection.on('connected', function() {
 // Init gfs
 let gfs;
 
-conn.once('open', () => {
+/*conn.once('open', () => {
   // Init stream
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection('uploads');
@@ -88,7 +89,7 @@ router.post('/slider', upload.single('file'), (req, res) => {
   // res.json({ file: req.file });
   console.log(`post добавление слайда ${res.json({ file: req.file })}`);
   //res.redirect('/');
-});
+});*/
 
 // If the connection throws an error
 mongoose.connection.on('error', function(err) {
