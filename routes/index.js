@@ -68,10 +68,10 @@ db.collection('yourcollectionname')
    .insert(newItem, function(err, result){
    if (err) { console.log(err); };
       var newoid = new ObjectId(result.ops[0]._id);
-      fs.remove(req.file.path, function(err) {
+      /*fs.remove(req.file.path, function(err) {
          if (err) { console.log(err) };
          res.render('my_pages/admin', {title:'Thanks for the Picture!'});
-         });
+         });*/
       });
    });
    };
