@@ -25,8 +25,6 @@ var isAuthenticated = function(req, res, next) {
   res.redirect('/');
 };
 
-var upload = multer({limits: {fileSize: 2000000 },dest:'/uploads/'});
-
 router.get('/', ctrlHome.index);
 
 router.get('/blog', ctrlBlog.blog);
