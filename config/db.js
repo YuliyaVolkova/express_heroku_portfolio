@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose');
 const config = require('./config');
 
@@ -57,7 +59,7 @@ const upload = multer({ storage });
 
 // @route GET /
 // @desc Loads form
-app.get('/slider', (req, res) => {
+router.get('/slider', (req, res) => {
   gfs.files.find().toArray((err, files) => {
     // Check if files
     if (!files || files.length === 0) {
@@ -82,7 +84,7 @@ app.get('/slider', (req, res) => {
 
 // @route POST /upload
 // @desc  Uploads file to DB
-app.post('/slider', upload.single('file'), (req, res) => {
+router.post('/slider', upload.single('file'), (req, res) => {
   // res.json({ file: req.file });
   console.log(`post добавление слайда ${res.json({ file: req.file })}`);
   //res.redirect('/');
