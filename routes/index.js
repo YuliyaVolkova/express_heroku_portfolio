@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 
 const ctrlHome = require('../controllers/homepage');
 const ctrlBlog = require('../controllers/blog');
@@ -15,6 +16,8 @@ var isAuthenticated = function(req, res, next) {
   res.redirect('/');
 };
 
+var upload = multer({limits: {fileSize: 2000000 },dest:'/uploads/'});
+
 router.get('/', ctrlHome.index);
 
 router.get('/blog', ctrlBlog.blog);
@@ -28,6 +31,6 @@ router.get('/login', ctrlLogin.login);
 router.post('/login', ctrlLogin.auth);
 
 router.get('/admin', isAuthenticated, ctrlAdmin.admin);
-router.post('/admin/slider', isAuthenticated, ctrlAdmin.uploadSlide);
+router.post('/admin/slider', isAuthenticated, upload.single('picture'), ctrlAdmin.uploadSlide);
 
 module.exports = router;

@@ -9,10 +9,11 @@ const mongoose = require('mongoose'),
       type: String,
       required: [true, 'Укажите технологии']
     },
-    url: {
-      type: String,
+    image: {
+       data: Buffer,
+       contentType: String 
     }
   });
 
 //просим mongoose сохранить модель для ее дальнейшего использования
-mongoose.model('slider', PicSchema);
+mongoose.model('herokuslide', PicSchema);

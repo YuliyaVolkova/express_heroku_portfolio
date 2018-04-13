@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 module.exports.getSlides = function (req, res) {
-  const slider = mongoose.model('slider');
+  const slider = mongoose.model('herokuslide');
   const mesDefault = [{
     title: 'В базе нет работ',
     technologies: 'Frontend',
-    url: ''
+    image: {}
   }];
   slider
     .find()
@@ -22,11 +22,14 @@ module.exports.getSlides = function (req, res) {
     });
 };
 module.exports.addSlide = function (req, res) {
-  const Model = mongoose.model('slider');
+  const Model = mongoose.model('herokuslide');
   let item = new Model({
     title: req.body.title,
     technologies: req.body.technologies,
-    url: req.body.url
+    image: {
+      data: req.body.image.data,
+      contentType: req.body.image.contentType
+    }
   });
   // сохраняем запись в базе
   item
