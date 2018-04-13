@@ -20,7 +20,6 @@ var conn = mongoose.connection;
 module.exports.uploadSlide = function (req, res) {
   let form = new formidable.IncomingForm();
   let upload = 'public/upload';
-  console.log('in controller admin.js module uploadSlide');
 
   //form.uploadDir = __dirname+"/Uploads";
   if (!fs.existsSync(upload)) {
@@ -30,14 +29,30 @@ module.exports.uploadSlide = function (req, res) {
   form.uploadDir = path.join(process.cwd(), upload);
     form.keepExtensions = true;
     form.parse(req, function (err, fields, files) {
+      console.log(fields.title, fields.technologies, fields.photo);
+        if (err) {
+          return res.json({msg: 'Не удалось загрузить картинку', status: 'Error'});
+        }
+        if (!fields.title) {
+        fs.unlink(files.photo.path);
+        return res.json({msg: 'Не указано название работы!', status: 'Error'});
+        }
+        if (!fields.technologies) {
+          fs.unlink(files.photo.path);
+          return res.json({msg: 'Не указаны технологии!', status: 'Error'});
+        }
+        if (!fields.photo) {
+          fs.unlink(files.photo.path);
+          return res.json({msg: 'Не выбран файл для загрузки!', status: 'Error'});
+        }
         if (!err) {
-            console.log('Files Uploaded: ' + files.file)
+            console.log('Files Uploaded: ' + files.photo)
             grid.mongo = mongoose.mongo;
             var gfs = grid(conn.db);
             var writestream = gfs.createWriteStream({
-                filename: files.file.name
+                filename: files.photo.name
             });
-            fs.createReadStream(files.file.path).pipe(writestream);
+            fs.createReadStream(files.photo.path).pipe(writestream);
         }
     });
     form.on('end', function () {
