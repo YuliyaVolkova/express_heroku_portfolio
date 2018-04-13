@@ -2,9 +2,11 @@ const formidable = require('formidable');
 const fs = require('fs');
 const path = require('path');
 const http = require('request');
+var mongoose = require("mongoose");
+var grid = require("gridfs-stream");
 const config = require('../config/config.json');
-const apiServer = config.server.path;
-//const multer = require('multer');
+//const apiServer = config.server.path;
+
 
 module.exports.admin = function (req, res) {
   res.render('my_pages/admin', {
@@ -12,14 +14,37 @@ module.exports.admin = function (req, res) {
   });
 };
 
+mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`);
+var conn = mongoose.connection;
+
 module.exports.uploadSlide = function (req, res) {
   let form = new formidable.IncomingForm();
-  //let upload = multer({limits: {fileSize: 2000000 },dest:'/uploads/'});
-  /*let fileName;  
+  //let upload = 'public/upload';
+
+  form.uploadDir = __dirname+"/Uploads";
+    form.keepExtensions = true;
+    form.parse(req, function (err, fields, files) {
+        if (!err) {
+            console.log('Files Uploaded: ' + files.file)
+            grid.mongo = mongoose.mongo;
+            var gfs = grid(conn.db);
+            var writestream = gfs.createWriteStream({
+                filename: files.file.name
+            });
+            fs.createReadStream(files.file.path).pipe(writestream);
+        }
+    });
+    form.on('end', function () {
+        res.send('Completed ... go check fs.files & fs.chunks in mongodb');
+    });
+
+
+
+ /* let fileName;  
   if (!fs.existsSync(upload)) {
     fs.mkdirSync(upload);
-  }*/
-  //form.uploadDir = path.join(process.cwd(), upload);
+  }
+  form.uploadDir = path.join(process.cwd(), upload);
   form.parse(req, function (err, fields, files) {
     if (err) {
       return res.json({msg: 'Не удалось загрузить картинку', status: 'Error'});
@@ -62,5 +87,5 @@ module.exports.uploadSlide = function (req, res) {
         res.json({msg: 'Картинка успешно загружена', status: 'Ok'});
       });
     });  
-  })
+  })*/
 }
