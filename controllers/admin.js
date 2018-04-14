@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('request');
 var mongoose = require("mongoose");
-var grid = require("gridfs-stream");
+var Grid = require("gridfs-stream");
 
 const crypto = require('crypto');
 const multer = require('multer');
