@@ -48,7 +48,8 @@ const storage = new GridFsStorage({
     });
   }
 });
-const upload = multer({ storage });
+//const upload = multer({ storage });
+module.exports.upload = multer({ storage });
 
 module.exports.getSlides = function (req, res) {
    console.log('in get sliders');
