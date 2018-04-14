@@ -14,7 +14,7 @@ require('./config/db');
 
 const app = express();
 const index = require('./routes/index');
-const indexApi = require('./api/routes/index');
+//const indexApi = require('./api/routes/index');
 
 const db = require('./config/db');
 app.set('port', (process.env.PORT || 5000));
