@@ -14,7 +14,7 @@ block extend
 	#parallax.l-parallax__container
 		- for (var i = 0; i < 10; i++)
 			.parallax-layer(data-speed=`${(i+1)*0.01}`)
-				img.parallax-layer__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="")
+				img.parallax-layer__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="", style="diplay:none;")
 	.l-login__button
 		button.c-button#targetLogin
 			span.c-button__text

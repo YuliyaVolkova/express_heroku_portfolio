@@ -15,13 +15,13 @@ block extend
 		.l-scroll-parallax-container
 			- for(i = 0; i < 9; i++)
 				.l-scroll-parallax__layer
-					img.l-scroll-parallax__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="")
+					img.l-scroll-parallax__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="", style="diplay:none;")
 			+social('l-hero', social, 'assets/images/sprites/sprite.svg')
 			+hamburger(navList, 'about')
 			.l-hero__develop.l-hero__develop_blog
 				.c-developer
 					.c-developer__img-wrap(style="background-image: url('assets/images/content/photo.jpg'); background-repeat:no-repeat;")
-						img.c-developer__img.visually-hidden(alt="", src='assets/images/content/photo.jpg')
+						img.c-developer__img.visually-hidden(alt="", src='assets/images/content/photo.jpg', style="diplay:none;")
 					.c-developer__content
 						.c-develop_blog-header
 							+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')

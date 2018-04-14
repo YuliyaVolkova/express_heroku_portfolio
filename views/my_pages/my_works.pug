@@ -9,7 +9,7 @@ block extend
 		.l-scroll-parallax-container
 			- for(i = 0; i < 9; i++)
 				.l-scroll-parallax__layer
-					img.l-scroll-parallax__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="")
+					img.l-scroll-parallax__img(src=`assets/images/decor/bg/parallax/layer_${i+1}.png`, alt="", style="diplay:none;")
 			include ../components/section-header.pug
 			.l-main__top
 				+icon('bg', 'svg_main-top_one-color', 'assets/images/sprites/sprite.svg')
