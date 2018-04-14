@@ -4,6 +4,7 @@ const path = require('path');
 const http = require('request');
 var mongoose = require("mongoose");
 var Grid = require("gridfs-stream");
+const config = require('../config/config.json');
 const mongoURI = `mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`;
 
 const crypto = require('crypto');
