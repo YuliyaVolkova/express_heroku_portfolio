@@ -50,10 +50,32 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 
-
+module.exports.getSlides = function (req, res) {
+   console.log('in get sliders');
+  gfs.files.find().toArray((err, files) => {
+    // Check if files
+    if (!files || files.length === 0) {
+      console.log('в базе нет записей');
+      //res.render('index', { files: false });
+    } else {
+      files.map(file => {
+        if (
+          file.contentType === 'image/jpeg' ||
+          file.contentType === 'image/png'
+        ) {
+          file.isImage = true;
+        } else {
+          file.isImage = false;
+        }
+      });
+      //res.render('index', { files: files });
+      console.log(`в базе uploads найдены ${files}`);
+    }
+  });
+};
 // @route GET /
 // @desc Loads form
-router.get('/api/slider', (req, res) => {
+/*router.get('/api/slider', (req, res) => {
   console.log('in get sliders');
   gfs.files.find().toArray((err, files) => {
     // Check if files
@@ -75,15 +97,20 @@ router.get('/api/slider', (req, res) => {
       console.log(`в базе uploads найдены ${files}`);
     }
   });
-});
+});*/
+
+module.exports.addSlide = function (req, res) {
+  // body...
+  console.log(`post добавление слайда ${res.json({ file: req.file })}`);
+};
 
 // @route POST /upload
 // @desc  Uploads file to DB
-router.post('/slider', upload.single('file'), (req, res) => {
+/*router.post('/slider', upload.single('file'), (req, res) => {
   // res.json({ file: req.file });
   console.log(`post добавление слайда ${res.json({ file: req.file })}`);
   //res.redirect('/');
-});
+});*/
 
 // If the connection throws an error
 mongoose.connection.on('error', function(err) {
