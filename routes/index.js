@@ -28,6 +28,6 @@ router.get('/login', ctrlLogin.login);
 router.post('/login', ctrlLogin.auth);
 
 router.get('/admin', isAuthenticated, ctrlAdmin.admin);
-router.post('/admin/slider', isAuthenticated, ctrlAdmin.uploadSlide);
+router.post('/slider', isAuthenticated, ctrlAdmin.uploadSlide);
 
 module.exports = router;
