@@ -4,6 +4,7 @@ const path = require('path');
 const http = require('request');
 var mongoose = require("mongoose");
 var Grid = require("gridfs-stream");
+const mongoURI = `mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`;
 
 const crypto = require('crypto');
 const multer = require('multer');
@@ -26,6 +27,7 @@ module.exports.uploadSlide = function (req, res) {
  let conn = mongoose.connection;
  let gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection('uploads');
+  console.log(gfs);
 
   //form.uploadDir = __dirname+"/Uploads";
   /*if (!fs.existsSync(upload)) {
