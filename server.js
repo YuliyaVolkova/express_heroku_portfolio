@@ -15,6 +15,8 @@ require('./config/db');
 const app = express();
 const index = require('./routes/index');
 const indexApi = require('./api/routes/index');
+
+const db = require('./config/db');
 app.set('port', (process.env.PORT || 5000));
 
 app.use(methodOverride('_method'));
@@ -45,8 +47,10 @@ require('./config/config-passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api', indexApi);
+//app.use('/api', indexApi);
 app.use('/', index);
+app.use('/api', db);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

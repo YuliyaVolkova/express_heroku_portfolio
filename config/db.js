@@ -11,6 +11,38 @@ const Grid = require('gridfs-stream');
 
 mongoose.Promise = global.Promise;
 
+const ctrlBlog = require('../api/controllers/blog');
+//const ctrlSlider = require('../controllers/slider');
+const ctrlSkills = require('../api/controllers/skills');
+//const ctrlSlider = require('../../config/db');
+
+var isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({message: 'Unauthorized', error: 401})
+};
+
+router.get('/blog', ctrlBlog.getArticles); // READ
+router.post('/blog', isAuthenticated, ctrlBlog.createArticle); // CREATE
+router.put('/blog/:id', isAuthenticated, ctrlBlog.editArticle); // EDIT
+router.delete('/blog/:id', isAuthenticated, ctrlBlog.deleteArticle); // DELETE
+
+router.get('/slider', ctrlSlider.getSlides);
+router.post('/slider', ctrlSlider.addSlide);
+
+router.get('/skill', ctrlSkills.getSkills); // READ
+router.post('/skill', isAuthenticated, ctrlSkills.createSkill); // CREATE
+router.put('/skill/:id', isAuthenticated, ctrlSkills.editSkill); // EDIT
+router.delete('/skill/:id', isAuthenticated, ctrlSkills.deleteSkill); // DELETE
+
+
+router.get('*', (req, res) => {
+  res.status(404).json({msg: 'Not found', err: 404});
+})
+
+module.exports = router;
+
 // Mongo URI
 const mongoURI = `mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`;
 let gfs;
@@ -48,10 +80,11 @@ const storage = new GridFsStorage({
     });
   }
 });
-//const upload = multer({ storage });
-module.exports.upload = multer({ storage });
 
-module.exports.getSlides = function (req, res) {
+const upload = multer({ storage });
+//module.exports.upload = multer({ storage });
+
+router.get('/slider', (req, res) => {
    console.log('in get sliders');
   gfs.files.find().toArray((err, files) => {
     // Check if files
@@ -100,9 +133,10 @@ module.exports.getSlides = function (req, res) {
   });
 });*/
 
-module.exports.addSlide = function (req, res) {
+router.post('/slider', upload.single('file'), (req, res) => {
   // body...
   console.log(`post добавление слайда ${res.json({ file: req.file })}`);
+    res.redirect('/admin');
 };
 
 // @route POST /upload
@@ -136,3 +170,31 @@ require('../api/models/blog');
 //require('../api/models/slider');
 require('../api/models/skills');
 require('../models/user');
+
+
+var isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({message: 'Unauthorized', error: 401})
+};
+
+router.get('/blog', ctrlBlog.getArticles); // READ
+router.post('/blog', isAuthenticated, ctrlBlog.createArticle); // CREATE
+router.put('/blog/:id', isAuthenticated, ctrlBlog.editArticle); // EDIT
+router.delete('/blog/:id', isAuthenticated, ctrlBlog.deleteArticle); // DELETE
+
+router.get('/slider', ctrlSlider.getSlides);
+router.post('/slider', ctrlSlider.addSlide);
+
+router.get('/skill', ctrlSkills.getSkills); // READ
+router.post('/skill', isAuthenticated, ctrlSkills.createSkill); // CREATE
+router.put('/skill/:id', isAuthenticated, ctrlSkills.editSkill); // EDIT
+router.delete('/skill/:id', isAuthenticated, ctrlSkills.deleteSkill); // DELETE
+
+
+router.get('*', (req, res) => {
+  res.status(404).json({msg: 'Not found', err: 404});
+})
+
+module.exports = router;
