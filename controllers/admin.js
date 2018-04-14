@@ -4,8 +4,14 @@ const path = require('path');
 const http = require('request');
 var mongoose = require("mongoose");
 var grid = require("gridfs-stream");
+
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+
 const config = require('../config/config.json');
-//const apiServer = config.server.path;
+
+const apiServer = config.server.path;
 
 
 module.exports.admin = function (req, res) {
@@ -14,21 +20,48 @@ module.exports.admin = function (req, res) {
   });
 };
 
-//mongoose.connect(`mongodb://${config.db.user}:${config.db.password}@${config.db.host}:${config.db.port}/${config.db.name}`);
-var conn = mongoose.connection;
-
 module.exports.uploadSlide = function (req, res) {
-  let form = new formidable.IncomingForm();
-  let upload = 'public/upload';
+  //let form = new formidable.IncomingForm();
+ // let upload = 'public/upload';
+ let conn = mongoose.connection;
+ let gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
 
   //form.uploadDir = __dirname+"/Uploads";
-  if (!fs.existsSync(upload)) {
+  /*if (!fs.existsSync(upload)) {
     fs.mkdirSync(upload);
-  }
+  }*/
   //form.uploadDir = __dirname+"/Uploads";
-  form.uploadDir = path.join(process.cwd(), upload);
-    form.keepExtensions = true;
-    form.parse(req, function (err, fields, files) {
+
+  // Create storage engine
+const storage = new GridFsStorage({
+  url: mongoURI,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString('hex') + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+const upload = multer({ storage });
+upload.single('file').then((req, res) => {
+  // res.json({ file: req.file });
+  console.log(res.json({ file: req.file }));
+  res.redirect('/admin');});
+
+
+  //form.uploadDir = path.join(process.cwd(), upload);
+   // form.keepExtensions = true;
+  /*  form.parse(req, function (err, fields, files) {
       console.log(fields.title, fields.technologies, fields.photo);
         if (err) {
           return res.json({msg: 'Не удалось загрузить картинку', status: 'Error'});
@@ -57,7 +90,7 @@ module.exports.uploadSlide = function (req, res) {
     });
     form.on('end', function () {
         res.send('Completed ... go check fs.files & fs.chunks in mongodb');
-    });
+    });*/
 
 
 
@@ -109,4 +142,4 @@ module.exports.uploadSlide = function (req, res) {
       });
     });  
   })*/
-}
+};

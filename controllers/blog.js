@@ -12,7 +12,6 @@ module.exports.blog = function (req, res) {
   const sendObj = {
     title: 'My Blog'
   };
-  console.log('in controller blog');
   http(requestOptions, function (error, response, body) {
     if (error) {
       console.log(error);

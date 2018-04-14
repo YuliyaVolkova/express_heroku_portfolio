@@ -35,7 +35,7 @@ passport.use(
             );
           }
           if (!user.validPassword(password)) {
-            return done(null, false, req.flash('message', 'Не верный пароль'));
+            return done(null, false, req.flash('message', 'Неверный пароль'));
           }
           return done(null, user);
         })

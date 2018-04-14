@@ -1,16 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const crypto = require('crypto');
-const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require('gridfs-stream');
-
-
 const ctrlBlog = require('../controllers/blog');
-//const ctrlSlider = require('../controllers/slider');
+const ctrlSlider = require('../controllers/slider');
 const ctrlSkills = require('../controllers/skills');
-const ctrlSlider = require('../../config/db');
 
 var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -25,7 +18,7 @@ router.put('/blog/:id', isAuthenticated, ctrlBlog.editArticle); // EDIT
 router.delete('/blog/:id', isAuthenticated, ctrlBlog.deleteArticle); // DELETE
 
 router.get('/slider', ctrlSlider.getSlides);
-router.post('/slider', ctrlSlider.addSlide);
+//router.post('/slider', ctrlSlider.addSlide);
 
 router.get('/skill', ctrlSkills.getSkills); // READ
 router.post('/skill', isAuthenticated, ctrlSkills.createSkill); // CREATE
