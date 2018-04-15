@@ -9,9 +9,8 @@ const mongoose = require('mongoose'),
       type: String,
       required: [true, 'Укажите технологии']
     },
-    image: {
-       data: Buffer,
-       contentType: String 
+    url: {
+      type: String,
     }
   });
 

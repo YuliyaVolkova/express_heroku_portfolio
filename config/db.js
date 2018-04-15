@@ -37,6 +37,6 @@ process.on('SIGINT', function() {
   });
 });
 require('../api/models/blog');
-//require('../api/models/slider');
+require('../api/models/slider');
 require('../api/models/skills');
 require('../models/user');

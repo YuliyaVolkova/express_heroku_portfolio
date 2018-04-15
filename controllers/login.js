@@ -3,8 +3,10 @@ const passport = require('passport');
 
 module.exports.login = function (req, res) {
   if (req.isAuthenticated()) {
+    console.log(`идентифицирован ${req.isAuthenticated()}`);
     return res.redirect('/admin');
   }
+  console.log(`не идентифицирован ${req.isAuthenticated()}`)
   res.render('my_pages/login', {
     title: 'Авторизация',
     mes: req.flash('message')
