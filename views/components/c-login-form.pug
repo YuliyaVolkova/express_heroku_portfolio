@@ -17,6 +17,8 @@
 					:class="{'error': attemptSubmit && wrongLogin}")
 					.validator-error(v-if="login.error")
 						| {{login.error}}
+					.c-login__mes(v-if="mes")
+						| {{mes}}
 			.c-form__row
 				label.c-form__item
 					span.c-form__item-logo(:class="{'error': attemptSubmit && wrongPassword}")
