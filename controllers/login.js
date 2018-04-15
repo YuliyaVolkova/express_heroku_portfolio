@@ -3,13 +3,11 @@ const passport = require('passport');
 
 module.exports.login = function (req, res) {
   if (req.isAuthenticated()) {
-    console.log(`идентифицирован ${req.isAuthenticated()}`);
     return res.redirect('/admin');
   }
-  console.log(`не идентифицирован ${req.isAuthenticated()}`)
   res.render('my_pages/login', {
     title: 'Авторизация',
-    mes: req.flash('message')
+    //mes: req.flash('message')
   });
 }
 
@@ -20,9 +18,8 @@ module.exports.auth = function (req, res, next) {
     }
     if (!user) {
       //req.flash('message', ' укажите правильный логин и пароль!');
-      //res.json({msg: req.flash('message'), status: 'Error'});
       //return res.redirect('/login');
-      return res.json({mes: 'Неверный логин и пароль'});
+      return res.json({mes: 'Неверный логин или пароль'});
     }
     req.logIn(user, function(err) {
       if (err) {

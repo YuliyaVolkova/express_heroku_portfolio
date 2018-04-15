@@ -4,7 +4,7 @@ const config = require('../config/config.json');
 module.exports.works = function (req, res) {
   const sendObj = {
     title: 'Мои работы',
-    msg: req.flash('mes')
+    //msg: req.flash('mes')
   };
   res.render('my_pages/my_works', Object.assign({}, sendObj));
 }
@@ -32,10 +32,12 @@ module.exports.sendEmail = function(req, res) {
   transporter.sendMail(mailOptions, function (error, info) {
     //если есть ошибки при отправке - сообщаем об этом
     if (error) {
-      req.flash('mes', 'При отправке письма произошла ошибка: ' + error);
-      return res.redirect('/works');
+      //req.flash('mes', 'При отправке письма произошла ошибка: ' + error);
+      //return res.redirect('/works');
+      return res.json({mes: `При отправке письма произошла ошибка: ${error}`});
     }
-    req.flash('mes', 'Письмо успешно отправлено')
-    res.redirect('/works');
+    //req.flash('mes', 'Письмо успешно отправлено')
+    //res.redirect('/works');
+    return res.json({mes: "Письмо успешно отправлено"});
   });
 }

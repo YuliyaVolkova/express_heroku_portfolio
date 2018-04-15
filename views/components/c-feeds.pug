@@ -37,24 +37,24 @@
 				h3.h-title-article
 					| Связаться со мной
 				+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
-				if (msg)
-					.c-feed__mes=msg
+				.c-feeds__mes(v-if="mes")
+					| {{mes}}
 			form.c-form#feeds-form(action='/mail', method="POST", @submit='validateForm', novalidate="true", enctype="application/x-www-form-urlencoded")
 				.c-form__inner
 					.c-form__row
 						label.c-form__item
 							input.c-form__input(type="text", name="name", placeholder="Имя", v-model='name.value',
-							:class="{'error': attemptSubmit && wrongName}")
+							:class="{'error': attemptSubmit && wrongName}", @keyup="mes=''")
 							.validator-error(v-if="name.error")
 								| {{name.error}}
 					.c-form__row
 						label.c-form__item
-							input.c-form__input(type="email", name="email",  autocomplete="email", placeholder="Email", :class="{'error': attemptSubmit && wrongMail}", v-model='email.value')
+							input.c-form__input(type="email", name="email",  autocomplete="email", placeholder="Email", :class="{'error': attemptSubmit && wrongMail}", v-model='email.value', @keyup="mes=''")
 							.validator-error(v-if="email.error")
 								| {{email.error}}
 					.c-form__row
 						label.c-form__item
-							textarea.c-form__textarea(type="text", placeholder="Ваше сообщение", name="text", v-model='textmes.value', :class="{'error': attemptSubmit && missingMessage}")
+							textarea.c-form__textarea(type="text", placeholder="Ваше сообщение", name="text", v-model='textmes.value', :class="{'error': attemptSubmit && missingMessage}", @keyup="mes=''")
 							.validator-error(v-if="textmes.error")
 								| {{textmes.error}}
 					ul.c-form__buts-action
