@@ -13,7 +13,7 @@
 				label.c-form__item
 					span.c-form__item-logo(:class="{'error': attemptSubmit && wrongLogin}")
 						+icon('login', 'svg_login', 'assets/images/sprites/sprite.svg')
-					input.c-form__input(type="text", name="login", autocomplete="username", placeholder="Логин", v-model='login.value', @enter="mes=''", :class="{'error': attemptSubmit && wrongLogin}")
+					input.c-form__input(type="text", name="login", autocomplete="username", placeholder="Логин", v-model='login.value', @keyup="mes=''", :class="{'error': attemptSubmit && wrongLogin}")
 					.validator-error(v-if="login.error")
 						| {{login.error}}
 					.c-login__mes(v-if="mes")
@@ -22,7 +22,7 @@
 				label.c-form__item
 					span.c-form__item-logo(:class="{'error': attemptSubmit && wrongPassword}")
 						+icon('password', 'svg_login', 'assets/images/sprites/sprite.svg')
-					input.c-form__input(type="password", name="password", autocomplete="current-password", placeholder="Пароль", v-model='password.value', @enter="mes=''", :class="{'error': attemptSubmit && wrongPassword}")
+					input.c-form__input(type="password", name="password", autocomplete="current-password", placeholder="Пароль", v-model='password.value', @keyup="mes=''", :class="{'error': attemptSubmit && wrongPassword}")
 					.validator-error(v-if="password.error")
 						| {{password.error}}
 			.c-form__buttons
