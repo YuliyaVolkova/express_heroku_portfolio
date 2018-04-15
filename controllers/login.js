@@ -20,8 +20,9 @@ module.exports.auth = function (req, res, next) {
     }
     if (!user) {
       //req.flash('message', ' укажите правильный логин и пароль!');
-      res.json({msg: 'Пользователь не найден', status: 'Error'});
-      return res.redirect('/login');
+      //res.json({msg: req.flash('message'), status: 'Error'});
+      //return res.redirect('/login');
+      return res.json({status: 'Неверный логин и пароль'});
     }
     req.logIn(user, function(err) {
       if (err) {
