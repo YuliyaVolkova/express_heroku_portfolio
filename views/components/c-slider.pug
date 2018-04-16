@@ -14,7 +14,7 @@
 				| Посмотреть сайт
 	.c-slider__main-fr
 		transition-group(name='slide', mode='in-out',
-		enter-class='slide-in', leave-class='slide-out', enter-active-class='animated slide-in-active',
+		enter-class='slide-in', leave-class='slide-out', enter-active-class='animated slide-in-active', class='img-wrap',
 		leave-active-class='animated slide-out-active', tag='div')
 			img.c-slider__main-img(alt="", v-for="ind in slides", v-if="ind === active", :key="ind", :src="dataArr[ind-1].url")
 	.c-slider__control-fr
