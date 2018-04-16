@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
 module.exports.getSlides = function (req, res) {
-   console.log('in controller slider api');
-   
   const slider = mongoose.model('slider');
   const mesDefault = [{
     title: 'В базе нет работ',

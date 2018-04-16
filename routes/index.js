@@ -18,6 +18,7 @@ var isAuthenticated = function(req, res, next) {
 router.get('/', ctrlHome.index);
 
 router.get('/blog', ctrlBlog.blog);
+router.get('/nav/blog', ctrlBlog.navBlog);
 
 router.get('/about', ctrlAbout.about);
 
