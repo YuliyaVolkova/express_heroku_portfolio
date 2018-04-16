@@ -20,5 +20,5 @@ module.exports.blog = function (req, res) {
   });
 }
 module.exports.navBlog = function (req, res) {
-  return req.redirect('/blog');
+  return res.redirect('/blog');
 }
