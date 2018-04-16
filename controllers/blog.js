@@ -17,5 +17,6 @@ module.exports.blog = function (req, res) {
       console.log(error);
     }
     res.render('my_pages/blog', Object.assign({}, sendObj, body));
+    res.redirect('/blog');
   });
 }
