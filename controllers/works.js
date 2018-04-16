@@ -13,8 +13,9 @@ module.exports.sendEmail = function(req, res) {
   // требуем наличия имени, обратной почты и текста
   if (!req.body.name || !req.body.email || !req.body.text) {
     //если что-либо не указано - сообщаем об этом
-    req.flash('mes', 'Все поля нужно заполнить!')
-    return res.redirect('/works');
+    //req.flash('mes', 'Все поля нужно заполнить!')
+    //return res.redirect('/works');
+    res.json({mes: "Все поля нужно заполнить"});
   }
   // инициализируем модуль для отправки писем и указываем данные из конфига
   const transporter = nodemailer.createTransport(config.mail.smtp);
