@@ -19,6 +19,3 @@ module.exports.blog = function (req, res) {
     res.render('my_pages/blog', Object.assign({}, sendObj, body));
   });
 }
-module.exports.navBlog = function (req, res) {
-  return res.redirect('/blog');
-}
