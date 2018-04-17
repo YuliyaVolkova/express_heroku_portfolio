@@ -4,7 +4,7 @@
 		h3.h-title-article
 			| Авторизуйтесь
 		+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
-	form.c-form(action="/login" id="login-form" method="POST",
+	form.c-form.c-form_h66(action="/login" id="autorization" method="POST",
 	@submit='validateForm', novalidate="true")
 		.c-form__inner
 			.c-form__row
@@ -30,7 +30,7 @@
 						| Я человек
 				span.c-form__row-title
 					| Вы точно не робот?
-				.c-form__row
+				.c-form__row.c-form__row_mb0
 					label.c-form__item
 						input.c-form__radio(type="radio", name="noBot", value="yes" v-model='radio.value')
 						span.c-form__item-title.c-form__item-title--radio(:class="{'error': attemptSubmit && wrongRadio}")
@@ -39,12 +39,12 @@
 						input.c-form__radio(type="radio", name="noBot", value="none" v-model='radio.value')
 						span.c-form__item-title.c-form__item-title--radio
 							| Не уверен
-			ul.c-form__buts-action
-				li.c-form__nav-item
-					a.c-form__nav-link#targetMain(href="/")
-						span.c-button__text
-							| На главную
-				li.c-form__nav-item
-					button.c-form__nav-link(type="submit",value="Submit")
-						span.c-button__text
-							| Войти
+	ul.c-form__buts-action
+		li.c-form__nav-item
+			button.c-form__nav-link#targetMain(type="button")
+				span.c-button__text
+					| На главную
+		li.c-form__nav-item
+			button.c-form__nav-link(type="submit",value="Submit", form="autorization")
+				span.c-button__text
+					| Войти

@@ -22,11 +22,9 @@ block extend
 	.l-welcome
 		.l-flip-container
 			.l-face-container
-			.l-backface-container
-			.visually-hidden#faceBl(type='template/text')
-				include ../components/c-welcome.pug
-			.visually-hidden#backFaceBl(type='template/text')
 				include ../components/c-login-form.pug
+			.l-backface-container
+				include ../components/c-welcome.pug
 	footer.l-copy
 		ul.c-copy
 			each val in copy
