@@ -6,7 +6,7 @@
 		+icon('dash', 'svg_dash', 'assets/images/sprites/sprite.svg')
 	form.c-form.c-form_h66(action="/login" id="autorization" method="POST",
 	@submit='validateForm', novalidate="true")
-		.c-form__inner
+		.c-form__inner.c-form__inner_jc-sa
 			.c-form__row
 				label.c-form__item
 					span.c-form__item-logo(:class="{'error': attemptSubmit && wrongLogin}")
